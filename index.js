@@ -14,12 +14,18 @@ async function getData() {
     return rows.map(row => {
       const obj = {};
       const title = row.querySelector(".result-title");
-
+      const price = row.querySelector(".result-price");
+      const location = row.querySelector(".result-hood");
       obj.title = title.innerHTML;
       obj.link = title.getAttribute("href");
+      obj.price = price.innerHTML;
+      if (location.innerHTML) {
+        obj.location = location.innerHTML;
+      }
       return obj;
     });
   });
   console.log(results);
+  browser.close();
 }
 getData();
