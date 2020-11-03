@@ -15,13 +15,16 @@ async function getData() {
       const obj = {};
       const title = row.querySelector(".result-title");
       const price = row.querySelector(".result-price");
-      const location = row.querySelector(".result-hood");
+      if (row.querySelector(".result-hood")) {
+        const location = row.querySelector(".result-hood");
+        obj.location = location.innerHTML;
+      } else {
+        obj.location = "";
+      }
       obj.title = title.innerHTML;
       obj.link = title.getAttribute("href");
       obj.price = price.innerHTML;
-      if (location.innerHTML) {
-        obj.location = location.innerHTML;
-      }
+
       return obj;
     });
   });
