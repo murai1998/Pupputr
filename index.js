@@ -15,12 +15,11 @@ async function getData() {
       const obj = {};
       const title = row.querySelector(".result-title");
       const price = row.querySelector(".result-price");
-      if (row.querySelector(".result-hood")) {
-        const location = row.querySelector(".result-hood");
-        obj.location = location.innerHTML;
-      } else {
-        obj.location = "";
-      }
+      const imageTag = row.querySelector(".swipe [data-index='0'] img");
+      obj.image = imageTag ? imageTag.src : "";
+      obj.price = price ? price.innerHTML : "";
+      const location = row.querySelector(".result-hood");
+      obj.location = location ? location.innerHTML : "";
       obj.title = title.innerHTML;
       obj.link = title.getAttribute("href");
       obj.price = price.innerHTML;
@@ -32,3 +31,4 @@ async function getData() {
   browser.close();
 }
 getData();
+
