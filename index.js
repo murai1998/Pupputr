@@ -2,8 +2,11 @@ const puppeteer = require("puppeteer");
 
 async function getData() {
   const browser = await puppeteer.launch({
-    headless: false,
-    defaultViewport: null
+    // headless: false,
+    // defaultViewport: null
+    args:[
+        '--no-sandbox'
+    ]
   });
 
   const page = await browser.newPage();
@@ -29,6 +32,13 @@ async function getData() {
   });
   console.log(results);
   browser.close();
+  return {
+      url,
+      results
+  }
 }
-getData();
 
+getData();
+exports.getData = async function(req, res){
+    res.status(200).send(await getData())
+}
